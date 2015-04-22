@@ -1,0 +1,23 @@
+{
+    "name": "bubnovKelnik/yandex-direct-client",
+    "description": "PHP lib for Yandex Direct API",
+    "keywords": ["yandex", "direct", "api", "php"],
+    "homepage": "https://github.com/bubnovKelnik/yandex-direct-client.git",
+    "type": "git",
+    "version": "1.0.0",
+    "license": "MIT",
+    "minimum-stability" : "dev",
+    "require": {
+        "php":">=5.3.0",
+        "ext-curl": "*",
+        "kriswallsmith/buzz": "*"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": {
+            "YandexDirectClient\\": "lib/YandexDirectClient"
+        }
+    }
+}
