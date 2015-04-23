@@ -1,6 +1,6 @@
 <?php
 
-namespace YandexDirectClient;
+namespace YandexDirectClient\Exceptions;
 
 /* 
  * Common Yandex Direct error
