@@ -45,20 +45,56 @@ try {
          */
         echo "\n" . $item->getLogin() . " has units: " . $item->getUnitsRest();
     }
-    
-    /**
-     * Archiving the company
-     */
-    $response = $client->ArchiveCampaign(['CampaignID' => 11]);
-    
-    /**
-     * As in API docs, response is integer, so if you echo $response, you will get plain integer
-     */
-    echo "\nStatus = " . $response; //outputs "Status = 1"
 
     /**
-     * And so on...
+     * Or you can access directly Nth element in array
      */
+    echo "\nFirst user units: " . $response->get(0)->getUnitsRest();
+    
+    /**
+     * Generating WordstatReport
+     */
+    $reportId = $client->CreateNewWordstatReport(['Phrases' => ['Купить холодильник', 'Холодильники недорого']]);
+    echo "\nReportId: " . $reportId;
+    
+    /**
+     * Wait for 10 seconds
+     */
+    sleep(10);
+    
+    /**
+     * Getting full reports list
+     */
+    $reports = $client->GetWordstatReportList();
+    foreach($reports as $report){
+        /**
+         * Find report with $reportId and status 'Done'
+         */
+        if($report->getReportID() == $reportId && $report->getStatusReport() === 'Done'){
+            echo "\nReport is done, reading";
+            break;
+        }
+    }
+    
+    /**
+     * Get wordstat report by $reportId
+     */
+    $report = $client->GetWordstatReport($reportId);
+    foreach($report as $reportPart){
+        foreach($reportPart->getSearchedWith() as $searchedWith){
+            echo sprintf(
+                "\nPhrase `%s` has %d shows \n", 
+                $searchedWith->getPhrase(), 
+                $searchedWith->getShows()
+            );
+        }
+    }
+    
+    /**
+     * Deleting wordstat report
+     */
+    $status = $client->DeleteWordstatReport($reportId);
+    echo $status ? "\nReport successfully deleted" : "\nSomething wrong...";
 }
 catch (\YandexDirectClient\Exceptions\YandexErrorException $e){
     echo "\nYandexErrorException: " . $e->getMessage() . "\nWith details: " . $e->getErrorDetail() . "\n";
