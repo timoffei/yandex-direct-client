@@ -1,7 +1,7 @@
 <?php
 namespace YandexDirectClient;
 
-use YandexDirectClient\ClientErrorException;
+use YandexDirectClient\Exceptions\ClientErrorException;
 
 /* 
  * Common response from Yandex Direct API

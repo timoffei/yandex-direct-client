@@ -11,6 +11,12 @@ use YandexDirectClient\Response;
 abstract class AbstractMethod 
 {
     /**
+     *
+     * @var String 
+     */
+    protected $methodName;
+    
+    /**
      * Provided param for method
      * @var Array 
      */
@@ -35,14 +41,27 @@ abstract class AbstractMethod
     }
     
     /**
+     * 
+     * @return String
+     * @throws \YandexDirectClient\Exceptions\ClientErrorException
+     */
+    public function getMethodName() {
+        if(empty($this->methodName)){
+            throw new \YandexDirectClient\Exceptions\ClientErrorException('No methodName', 500);
+        }
+        
+        return $this->methodName;
+    }
+    
+    /**
      * Checks provided params before request
-     * @throws \YandexDirectClient\ClientErrorException
+     * @throws \YandexDirectClient\Exceptions\ClientErrorException
      */
     abstract public function isValid();
     
     /**
      * Create response object
-     * @throws \YandexDirectClient\YandexErrorException
+     * @throws \YandexDirectClient\Exceptions\YandexErrorException
      * @return \YandexDirectClient\Response or any
      */
     public function createResponse(array $data = array())

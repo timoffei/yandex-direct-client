@@ -3,8 +3,8 @@
 namespace YandexDirectClient;
 
 use Buzz\Browser;
-use YandexDirectClient\ClientErrorException;
-use YandexDirectClient\YandexErrorException;
+use YandexDirectClient\Exceptions\ClientErrorException;
+use YandexDirectClient\Exceptions\YandexErrorException;
 
 /**
  * Main class.
@@ -57,12 +57,19 @@ class Client {
      * @param Array $arguments
      */
     public function __call($name, $arguments) {
-        $method = '\YandexDirectClient\Methods\\' . $name;
-        if(!class_exists($method)){
-            throw new ClientErrorException('Unknown method "'.$name.'";', 500);
+        $methodClass = '\YandexDirectClient\Methods\\' . $name;
+        if(class_exists($methodClass)){
+            $method = new $methodClass($arguments);
+        }
+        else {
+            /**
+             * Fallback to GenericMethod
+             */
+            $method = new \YandexDirectClient\Methods\GenericMethod($arguments);
+            $method->setMethodName($name);
         }
         
-        return $this->request(new $method($arguments));
+        return $this->request($method);
     }
     
     /**
@@ -72,7 +79,7 @@ class Client {
     private function request(\YandexDirectClient\Methods\AbstractMethod $method) {
         $payload = [
             'locale' => $this->locale,
-            'method' => $method::METHOD,
+            'method' => $method->getMethodName(),
             'token' => $this->token
         ];
         if($param = $method->getParam()){
@@ -96,7 +103,7 @@ class Client {
     
     /**
      * Check if Yandex API responsed with error
-     * @throws \YandexDirectClient\YandexErrorException
+     * @throws \YandexDirectClient\Exceptions\YandexErrorException
      */
     private function checkResponseIsError(array $responseJson) {
         if(isset($responseJson['error_code'])){

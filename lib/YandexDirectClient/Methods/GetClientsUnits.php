@@ -1,7 +1,7 @@
 <?php
 namespace YandexDirectClient\Methods;
 
-use YandexDirectClient\ClientErrorException;
+use YandexDirectClient\Exceptions\ClientErrorException;
 
 /* 
  * GetClientsUnits method
@@ -9,7 +9,10 @@ use YandexDirectClient\ClientErrorException;
  */
 class GetClientsUnits extends AbstractMethod
 {
-    const METHOD = "GetClientsUnits";
+    /**
+     * {@inheritdoc}
+     */
+    protected $methodName = "GetClientsUnits";
     
     /**
      * {@inheritdoc}
