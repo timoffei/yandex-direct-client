@@ -77,7 +77,11 @@ abstract class AbstractMethod
             return $data;
         }
         if(Response::isAssoc($data)){
-            $response = new Response($data);
+            $newData = [];
+            foreach($data as $key => $val){
+                $newData[$key] = $this->createResponse($val);
+            }
+            $response = new Response($newData);
         }
         else {
             $response = new Response();
