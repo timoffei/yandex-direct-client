@@ -68,6 +68,7 @@ class Client {
             $method = new \YandexDirectClient\Methods\GenericMethod($arguments);
             $method->setMethodName($name);
         }
+        $method->isValid();
         
         return $this->request($method);
     }
