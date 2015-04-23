@@ -14,7 +14,18 @@ class ArchiveCampaign extends AbstractMethod
      */
     protected $methodName = "ArchiveCampaign";
     
-    protected static $schema = '{"$schema":"http://json-schema.org/draft-04/schema#","id":"/","type":"object","additionalProperties":false,"properties":{"CampaignID":{"id":"CampaignID","type":"integer"}}}';
+    protected static $schema = '{
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "id": "/",
+        "type": "object",
+        "additionalProperties":false,
+        "properties": {
+          "CampaignID": {
+            "id": "CampaignID",
+            "type": "integer"
+          }
+        }
+    }';
     
     /**
      * {@inheritdoc}
