@@ -10,7 +10,7 @@
  */
 require 'vendor/autoload.php';
 
-$authKey = 'YOUR-AUTH-KEY';
+$authKey = 'MY-AUTH-TOKEN';
 
 $client = new YandexDirectClient\Client($authKey);
 
@@ -18,17 +18,36 @@ try {
     /**
      * Getting Units for users
      */
-    $response = $client->GetClientsUnits(['login-to-check']);
+    $response = $client->GetClientsUnits(['my-user','customer-user']);
+    
+    /**
+     * If Response is an array - you can access to each element as in array
+     */
     foreach($response as $item){
+        /**
+         * If the item has a property (see Yandex Direct API docs) - you can access it by getter
+         */
         echo "\n" . $item->getLogin() . " has units: " . $item->getUnitsRest();
     }
     
+    /**
+     * Archiving the company
+     */
+    $response = $client->ArchiveCampaign(['CampaignID' => 11]);
     
+    /**
+     * As in API docs, response is integer, so if you echo $response, you will get plain integer
+     */
+    echo "\nStatus = " . $response; //outputs "Status = 1"
+
+    /**
+     * And so on...
+     */
 }
 catch (\YandexDirectClient\YandexErrorException $e){
-    echo "\nGot error: " . $e->getMessage() . "\nWith details: " . $e->getErrorDetail() . "\n";
+    echo "\nYandexErrorException: " . $e->getMessage() . "\nWith details: " . $e->getErrorDetail() . "\n";
 }
 catch (\Exception $e){
-    echo "\nGot error: " . $e->getMessage() . "\n";
+    echo "\nException: " . $e->getMessage() . "\n";
 }
 echo "\n";
