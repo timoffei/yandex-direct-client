@@ -60,7 +60,7 @@ try {
      * And so on...
      */
 }
-catch (\YandexDirectClient\YandexErrorException $e){
+catch (\YandexDirectClient\Exceptions\YandexErrorException $e){
     echo "\nYandexErrorException: " . $e->getMessage() . "\nWith details: " . $e->getErrorDetail() . "\n";
 }
 catch (\Exception $e){
