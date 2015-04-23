@@ -10,7 +10,8 @@
     "require": {
         "php":">=5.3.0",
         "ext-curl": "*",
-        "kriswallsmith/buzz": "*"
+        "kriswallsmith/buzz": "*",
+        "justinrainbow/json-schema": "dev-master"
     },
     "config": {
         "bin-dir": "bin"

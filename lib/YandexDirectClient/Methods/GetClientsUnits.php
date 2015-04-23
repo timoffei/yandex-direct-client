@@ -14,12 +14,12 @@ class GetClientsUnits extends AbstractMethod
      */
     protected $methodName = "GetClientsUnits";
     
+    protected static $schema = '{"$schema":"http://json-schema.org/draft-04/schema#","id":"/","type":"array","minItems":1,"uniqueItems":true,"additionalItems":true,"items":{"id":"0","type":"string"}}';
+    
     /**
      * {@inheritdoc}
      */
     public function isValid() {
-        if(!is_array($this->param) || empty($this->param)){
-            throw new ClientErrorException('GetClientsUnits expects param to be not empty array', 500);
-        }
+        $this->validateSchema();
     }
 }

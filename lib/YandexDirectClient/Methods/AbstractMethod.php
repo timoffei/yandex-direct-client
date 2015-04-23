@@ -17,6 +17,12 @@ abstract class AbstractMethod
     protected $methodName;
     
     /**
+     * Json schema to validate
+     * @var String 
+     */
+    protected static $schema;
+    
+    /**
      * Provided param for method
      * @var Array 
      */
@@ -80,5 +86,26 @@ abstract class AbstractMethod
         }
         
         return $response;
+    }
+    
+    /**
+     * Checks provided params by schema
+     * @throws \YandexDirectClient\Exceptions\ClientErrorException
+     */
+    protected function validateSchema() {
+        if(!static::$schema){
+            return;
+        }
+        $validator = new \JsonSchema\Validator();
+        $validator->check($this->param, static::$schema);
+
+        if (!$validator->isValid()) {
+            $errorTxt = "JSON does not validate. Violations:\n";
+            foreach ($validator->getErrors() as $error) {
+                $errorTxt.= sprintf("[%s] %s\n", $error['property'], $error['message']);
+            }
+            
+            throw new \YandexDirectClient\Exceptions\ClientErrorException($errorTxt, 500);
+        }
     }
 }
