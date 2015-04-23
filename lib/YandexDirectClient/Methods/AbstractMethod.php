@@ -97,7 +97,7 @@ abstract class AbstractMethod
             return;
         }
         $validator = new \JsonSchema\Validator();
-        $validator->check($this->param, static::$schema);
+        $validator->check(json_decode(json_encode($this->param)), json_decode(static::$schema));
 
         if (!$validator->isValid()) {
             $errorTxt = "JSON does not validate. Violations:\n";
