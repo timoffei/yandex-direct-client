@@ -33,7 +33,7 @@ abstract class AbstractMethod
      * @param Any or null $arguments
      */
     public function __construct($arguments = null) {
-        if(is_array($arguments) && isset($arguments[0]) && is_array($arguments[0])){
+        if(is_array($arguments) && isset($arguments[0])){
             $this->param = $arguments[0];
         }
     }
