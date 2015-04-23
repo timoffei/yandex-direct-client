@@ -67,10 +67,11 @@ abstract class AbstractMethod
     
     /**
      * Create response object
+     * @param Any $data
      * @throws \YandexDirectClient\Exceptions\YandexErrorException
      * @return \YandexDirectClient\Response or any
      */
-    public function createResponse(array $data = array())
+    public function createResponse($data = array())
     {
         if(!is_array($data)){
             return $data;

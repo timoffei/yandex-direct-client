@@ -87,7 +87,7 @@ class Client {
             $payload['param'] = $param;
         }
         try {
-            $response = $this->buzz->post(self::URL, self::$headers, json_encode($payload))->getContent();
+            $response = $this->buzz->post(self::URL, self::$headers, json_encode($payload, JSON_UNESCAPED_UNICODE))->getContent();
         }
         catch (\Exception $e) {
             throw new ClientErrorException($e->getMessage(), $e->getCode());
@@ -104,9 +104,10 @@ class Client {
     
     /**
      * Check if Yandex API responsed with error
+     * @param Any $responseJson
      * @throws \YandexDirectClient\Exceptions\YandexErrorException
      */
-    private function checkResponseIsError(array $responseJson) {
+    private function checkResponseIsError($responseJson) {
         if(isset($responseJson['error_code'])){
             $yError = new YandexErrorException($responseJson['error_str'], $responseJson['error_code']);
             $yError->setErrorDetail($responseJson['error_detail']);
