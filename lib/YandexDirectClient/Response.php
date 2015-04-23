@@ -29,7 +29,7 @@ class Response implements \ArrayAccess, \Countable, \Iterator
     
     public function __call($name, $arguments) {
         if(preg_match('/^get(.*)/', $name, $match)){
-            if(isset($this->elements[$match[1]])){
+            if(array_key_exists($match[1], $this->elements)){
                 return $this->elements[$match[1]];
             }
         }
