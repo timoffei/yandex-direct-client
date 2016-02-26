@@ -7,19 +7,18 @@
 * Доступны все методы API
 * Дополнительно перед отправкой проводится валидация входных данных через json-schema (База наполняется)
 
-1) Установка
+1) Установка *Composer*
 ----------------------------------
-
-    Добавьте "bubnovKelnik/yandex-direct-client": "dev-master" в секцию require файла composer.json
-    Добавьте 
     {
-        "type": "vcs",
-        "url":  "git@github.com:bubnovKelnik/yandex-direct-client.git"
+        "require": {"bubnovKelnik/yandex-direct-client": "1.0.0"},
+        "repositories": [
+            {
+                "type": "vcs",
+                "url":  "git@github.com:bubnovKelnik/yandex-direct-client.git"
+            }
+        ]
     }
-    в секцию repositories файла composer.json
     
-    composer update
-
 2) Использование
 -------------------------------------
 ```php
