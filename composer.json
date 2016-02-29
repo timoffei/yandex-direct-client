@@ -4,7 +4,7 @@
     "keywords": ["yandex", "direct", "api", "php"],
     "homepage": "https://github.com/bubnovKelnik/yandex-direct-client.git",
     "type": "git",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "license": "MIT",
     "minimum-stability" : "dev",
     "require": {
@@ -23,7 +23,7 @@
     },
     "extra": {
         "branch-alias": {
-            "fix-1.0.0": "b3300e1b70ce0240a84ae631334b2cf17c051dd8"
+            "dev-master": "fix-1.0.1"
         }
     }
 }
