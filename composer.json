@@ -1,5 +1,5 @@
 {
-    "name": "bubnov-mikhail/yandex-direct-client",
+    "name": "bubnov/yandex-direct-client",
     "description": "PHP lib for Yandex Direct API",
     "keywords": ["yandex", "direct", "api", "php"],
     "homepage": "https://github.com/bubnovKelnik/yandex-direct-client.git",
