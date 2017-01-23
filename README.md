@@ -10,15 +10,7 @@
 
 1) Установка *Composer*
 ----------------------------------
-    {
-        "require": {"bubnovKelnik/yandex-direct-client": "1.0.0"},
-        "repositories": [
-            {
-                "type": "vcs",
-                "url":  "git@github.com:bubnovKelnik/yandex-direct-client.git"
-            }
-        ]
-    }
+    composer require bubnov/yandex-direct-client
     
 2) Использование
 -------------------------------------
