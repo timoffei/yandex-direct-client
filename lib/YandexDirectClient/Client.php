@@ -13,7 +13,10 @@ use YandexDirectClient\Exceptions\YandexErrorException;
  */
 class Client {
     
-    const URL = 'https://api.direct.yandex.ru/v4/json/'; 
+    const URL = 'https://api.direct.yandex.ru/v4/json/';
+    const URL_SANDBOX = 'https://api-sandbox.direct.yandex.ru/v4/json/';
+
+    private $url;
     
     /**
      * Auth token for each request
@@ -44,11 +47,13 @@ class Client {
      * @param String $token
      * @param String $locale
      */
-    public function __construct($token, $locale = 'ru') {
+    public function __construct($token, $is_sandbox = false, $locale = 'ru') {
         $this->token = $token;
         $this->buzz = new Browser(new \Buzz\Client\Curl());
         $this->buzz->getClient()->setVerifyPeer(false);
         $this->locale = $locale;
+
+        $this->url = $is_sandbox ? self::URL_SANDBOX : self::URL;
     }
     
     /**
@@ -87,7 +92,7 @@ class Client {
             $payload['param'] = $param;
         }
         try {
-            $response = $this->buzz->post(self::URL, self::$headers, json_encode($payload, JSON_UNESCAPED_UNICODE))->getContent();
+            $response = $this->buzz->post($this->url, self::$headers, json_encode($payload, JSON_UNESCAPED_UNICODE))->getContent();
         }
         catch (\Exception $e) {
             throw new ClientErrorException($e->getMessage(), $e->getCode());
