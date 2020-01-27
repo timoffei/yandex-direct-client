@@ -1,10 +1,10 @@
 {
-    "name": "bubnov/yandex-direct-client",
+    "name": "timoffei/yandex-direct-client",
     "description": "PHP lib for Yandex Direct API",
     "keywords": ["yandex", "direct", "api", "php"],
-    "homepage": "https://github.com/bubnovKelnik/yandex-direct-client.git",
+    "homepage": "https://github.com/timoffei/yandex-direct-client.git",
     "type": "git",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "license": "MIT",
     "minimum-stability" : "dev",
     "require": {
